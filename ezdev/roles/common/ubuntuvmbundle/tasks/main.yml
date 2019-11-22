@@ -1,0 +1,9 @@
+---
+# tasks file for aks
+- include_tasks: rg.yml
+- include_tasks: vnet.yml
+- include_tasks: subnet.yml
+- include_tasks: pubip.yml
+- include_tasks: nsg.yml
+- include_tasks: ni.yml
+- include_tasks: ubunduvm.yml
