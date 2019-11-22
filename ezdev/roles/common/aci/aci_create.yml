@@ -1,0 +1,9 @@
+- hosts: localhost
+  tasks:
+      - include_role:
+           name: aci
+  vars:
+    resource_group: myResourceGroup
+    location: eastus 
+    aci_1_name: myACI1
+    aci_2_name: myACI2

@@ -1,0 +1,33 @@
+---
+# tasks file for aci
+    - name: Create a container with httpd image 
+      azure_rm_containerinstance:
+        resource_group: "{{ resource_group }}"
+        name: "{{ aci_1_name }}"
+        os_type: linux
+        ip_address: public
+        location: "{{ location }}"
+        ports:
+          - 80
+        containers:
+          - name: mycontainer
+            image: httpd
+            memory: 1.5
+            ports:
+              - 80
+
+    - name: Create another container with httpd image 
+      azure_rm_containerinstance:
+        resource_group: "{{ resource_group }}"
+        name: "{{ aci_2_name }}"
+        os_type: linux
+        ip_address: public
+        location: "{{ location }}"
+        ports:
+          - 80
+        containers:
+          - name: mycontainer
+            image: httpd
+            memory: 1.5
+            ports:
+              - 80

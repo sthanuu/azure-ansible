@@ -1,0 +1,13 @@
+- hosts: localhost
+  tasks:
+      - include_role:
+           name: appgw
+  vars:
+    resource_group: myResourceGroup
+    vnet_name: myVNet
+    subnet_name: mySubnet
+    location: eastus
+    publicip_name: myPublicIP
+    appgw_name: myAppGateway
+    aci_1_name: myACI1
+    aci_2_name: myACI2
