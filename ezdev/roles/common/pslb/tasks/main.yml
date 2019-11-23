@@ -1,2 +1,30 @@
 ---
 # tasks file for pslb
+- name: create load balancer
+  azure_rm_loadbalancer:
+        resource_group: myResourceGroup
+        name: lbtestfromansible
+        frontend_ip_configurations:
+          - name: frontendipconf0
+            subnet: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet 
+            private_ip_address: 20.0.1.10
+            private_ip_allocation_method: dynamic
+        backend_address_pools:
+          - name: backendaddrpool0
+        probes:
+          - name: prob0
+            port: 80
+        inbound_nat_pools:
+          - name: inboundnatpool0
+            frontend_ip_configuration_name: frontendipconf0
+            protocol: Tcp
+            frontend_port_range_start: 80
+            frontend_port_range_end: 81
+            backend_port: 8080
+        load_balancing_rules:
+          - name: lbrbalancingrule0
+            frontend_ip_configuration: frontendipconf0
+            backend_address_pool: backendaddrpool0
+            frontend_port: 80
+            backend_port: 80
+            probe: prob0

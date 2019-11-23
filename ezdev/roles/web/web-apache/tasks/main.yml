@@ -1,2 +1,10 @@
 ---
 # tasks file for web-apache
+- name: Create a VM with a custom image
+  azure_rm_virtualmachine:
+    resource_group: myResourceGroup
+    name: webserver01
+    vm_size: Standard_DS1_v2
+    admin_username: adminkottur
+    admin_password: azurekottur@123456
+    image: UbuntuapacheImage

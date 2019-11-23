@@ -1,0 +1,39 @@
+---
+# tasks file for azurefw
+- name: Create resource group
+  azure_rm_resourcegroup:
+    name: myResourceGroup
+    location: eastus
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: myResourceGroup
+    name: myVnet
+    address_prefixes: "30.0.0.0/16" 
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: myResourceGroup
+    name: mySubnet
+    address_prefix: "30.0.1.0/24"
+    virtual_network: myVnet
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: myResourceGroup
+    name: Azurefirewallsubnet
+    address_prefix: "30.0.2.0/24"
+    virtual_network: myVnet1
+- name: Create public IP address
+  azure_rm_publicipaddress:
+    resource_group: myResourceGroup
+    allocation_method: Static
+    sku: Standard
+    name: myPublicIpAddress
+- name: Create Azure Firewall
+  azure_rm_azurefirewall:
+    resource_group: myResourceGroup
+    name: myAzureFirewall
+    tags:
+      key1: value1
+    ip_configurations:
+     - subnet: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/Azurefirewallsubnet
+       public_ip_address: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIpAddress
+       name: azureFirewallIpConfiguration
