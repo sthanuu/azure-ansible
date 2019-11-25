@@ -1,4 +1,0 @@
-- hosts: 10.0.0.4
-  tasks:
-      - include_role:
-           name: web-pyflapache
