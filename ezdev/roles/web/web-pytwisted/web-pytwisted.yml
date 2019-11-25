@@ -1,4 +1,4 @@
-- hosts: 10.0.0.4
+- hosts: localhost
   tasks:
       - include_role:
            name: web-pytwisted
