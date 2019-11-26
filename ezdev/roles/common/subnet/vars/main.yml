@@ -1,2 +1,6 @@
 ---
 # vars file for subnet
+    resource_group: testrg
+    subnet_name: testsubnet
+    address_prefix: 20.0.1.0/24
+    virtual_network: testvnet

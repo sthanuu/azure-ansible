@@ -1,2 +1,5 @@
 ---
-# vars file for nsg
+# vars file for nsg#
+    resource_group: testrg
+    nsg_name: testnsg
+

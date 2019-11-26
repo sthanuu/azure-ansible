@@ -1,2 +1,4 @@
 ---
 # vars file for pubip
+    resource_group: testrg
+    publicip_name: testlbip

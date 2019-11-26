@@ -1,2 +1,9 @@
 ---
 # vars file for ni
+    resource_group: testrg
+    nic_name: testnic
+    vnet_name: testvnet
+    subnet_name: testsubnet
+    publicip_name: testpubip
+    nsg_name: testnsg
+

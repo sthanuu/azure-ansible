@@ -2,8 +2,8 @@
 # tasks file for nsg
 - name: Create Network Security Group that allows SSH
   azure_rm_securitygroup:
-    resource_group: myResourceGroup
-    name: myNetworkSecurityGroup
+    resource_group: "{{ resource_group }}"
+    name: "{{ nsg_name }}"
     rules:
       - name: SSH
         protocol: Tcp

@@ -2,9 +2,9 @@
 # tasks file for ni
 - name: Create virtual network interface card
   azure_rm_networkinterface:
-    resource_group: myResourceGroup
-    name: myNIC
-    virtual_network: myVnet
-    subnet: mySubnet
-    public_ip_name: myPublicIP
-    security_group: myNetworkSecurityGroup
+    resource_group: "{{ resource_group }}"
+    name: "{{ nic_name }}"
+    virtual_network: "{{ vnet_name }}"
+    subnet: "{{ subnet_name }}"
+    public_ip_name: "{{ publicip_name }}"
+    security_group: "{{ nsg_name }}"

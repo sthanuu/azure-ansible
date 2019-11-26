@@ -2,32 +2,33 @@
 # tasks file for web-nginx
   - name: Create resource group
     azure_rm_resourcegroup:
-      name: myResourceGroup
-      location: eastus
+      name: "{{ resource_group }}"
+      location: "{{ location }}" 
   - name: Create virtual network
     azure_rm_virtualnetwork:
-      resource_group: myResourceGroup
-      name: myVnet
-      address_prefixes: "20.0.0.0/16"
+      resource_group: "{{ resource_group }}"
+      name: "{{ vnet_name }}"
+      address_prefixes: "{{ address_prefixes }}"
   - name: Add subnet
     azure_rm_subnet:
-      resource_group: myResourceGroup
-      name: mySubnet
-      address_prefix: "20.0.1.0/24"
-      virtual_network: myVnet
+      resource_group: "{{ resource_group }}"
+      name: "{{ subnet_name }}"
+      address_prefix: "{{ address_prefix }}"
+      virtual_network: "{{ vnet_name }}"
   - name: Create public IP address
     azure_rm_publicipaddress:
-      resource_group: myResourceGroup
+      resource_group: "{{ resource_group }}"
       allocation_method: Static
-      name: myPublicIP
+      sku: Standard
+      name: "{{ publicip_name }}"
     register: output_ip_address
   - name: Dump public IP for VM which will be created
     debug:
       msg: "The public IP is {{ output_ip_address.state.ip_address }}."
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
-      resource_group: myResourceGroup
-      name: myNetworkSecurityGroup
+      resource_group: "{{ resource_group }}"
+      name: "{{ nsg_name }}"
       rules:
         - name: SSH
           protocol: Tcp
@@ -43,21 +44,21 @@
           direction: Inbound
   - name: Create virtual network interface card
     azure_rm_networkinterface:
-      resource_group: myResourceGroup
-      name: myNIC
-      virtual_network: myVnet
-      subnet: mySubnet
-      public_ip_name: myPublicIP
-      security_group: myNetworkSecurityGroup
+      resource_group: "{{ resource_group }}"
+      name: "{{ nic_name }}"
+      virtual_network: "{{ vnet_name }}"
+      subnet: "{{ subnet_name }}"
+      public_ip_name: "{{ publicip_name }}"
+      security_group: "{{ nsg_name }}"
   - name: Create VM
     azure_rm_virtualmachine:
-      resource_group: myResourceGroup
-      name: myVM
+      resource_group: "{{ resource_group }}"
+      name: "{{ vm_name }}"
       vm_size: Standard_B1s
-      admin_username: azureuser
+      admin_username: "{{ admin_username }}"
       ssh_password_enabled: false
       ssh_public_keys:
-        - path: /home/azureuser/.ssh/authorized_keys
-          key_data: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0QdzuAeq5lSS5GvMommPcUp4WmnJ96XL93SkXrgUKi+EzRmAREq1q3ZAVK3vyGda5lsUki4icms/8n3bhEPX6OWSBLuXwkeGaQ6lvOIzcKTd0fySOapXwws/5YnliJjIZuNkJun1joVWjO1XlKdZpNsYm0peuYmu8sJakDE7Kclo7JGmolCg4L3GA4frXQv2rkNr9nugLp6eULL78BE7XNn/5OF+G4T88keHKJEZpHLQouwJDKnj48KJQAorgt7Ol9SUNWOB+Uq3A8HO4SqiXvF8PXuTd8LkSzXQ1u6PWfERwYAW3DYmXPQmiwsedyGWZMRd+euhX4WOA+z549zcJ
-      network_interfaces: myNIC
-      image: Ubuntupydjangoimage
+        - path: /home/azurekottur/.ssh/authorized_keys
+          key_data: "{{ ssh_key_data }}"
+      network_interfaces: "{{ nic_name }}" 
+      image: "{{ image_name }}"
