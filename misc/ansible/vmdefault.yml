@@ -1,0 +1,16 @@
+- name: Create Azure VM
+  hosts: localhost
+  connection: local
+  tasks:
+- name: azure_rm_virtualmachine:
+  resource_group: Testing
+  name: testvm10
+  vm_size: Standard_D1
+  admin_username: azurekottur
+  ssh_password_enabled: true
+  admin_password: azurekottur@123456
+  image:
+    offer: UbuntuServer
+    publisher: Canonical
+    sku: '18.04-LTS'
+    version: latest

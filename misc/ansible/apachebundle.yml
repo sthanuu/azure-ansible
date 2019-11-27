@@ -1,0 +1,7 @@
+---
+- hosts: 20.0.1.4
+  become: yes
+  become_method: sudo
+  tasks:
+      - include_role:
+           name: apache

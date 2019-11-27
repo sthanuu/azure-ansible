@@ -1,0 +1,13 @@
+version: '1.0.0'
+name: test-apb-1
+description: your role description
+bindable: False
+async: optional
+metadata:
+  displayName: test-apb-1
+plans:
+  - name: default
+    description: This default plan deploys test-apb-1
+    free: True
+    metadata: {}
+    parameters: []

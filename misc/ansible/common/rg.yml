@@ -1,0 +1,7 @@
+- hosts: localhost
+  tasks:
+      - include_role:
+           name: rg
+  vars:
+    resource_group: myResourceGroup
+    location: eastus 
