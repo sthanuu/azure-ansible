@@ -1,5 +1,5 @@
 ---
 # vars file for vnet
-    resource_group: testrg
-    vnet_name : testvnet
-    address_prefixes: 20.0.0.0/16
+    resource_group: vnet2-rg
+    vnet_name : vnet2 
+    address_prefixes: 10.2.0.0/16

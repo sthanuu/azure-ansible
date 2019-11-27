@@ -1,0 +1,8 @@
+---
+# vars file for ubuntuvm
+    resource_group: panfw1-rg
+    vm_name: panfw1vm
+    admin_username: azureuser
+    nic_name: panfwmgmtnic
+    nic_name1: panfwuntrustnic
+    nic_name2: panfwtrustnic

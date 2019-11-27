@@ -1,6 +1,14 @@
 ---
 # vars file for subnet
-    resource_group: testrg
-    subnet_name: testsubnet
-    address_prefix: 20.0.1.0/24
-    virtual_network: testvnet
+    resource_group: vnet2-rg
+    subnet_name: default
+    address_prefix: 10.2.0.0/24
+    virtual_network: vnet2
+    #resource_group: panfw1-rg
+    #subnet_name1: untrustsubnet
+    #address_prefix1: 10.1.1.0/24
+    #virtual_network: panfw1vnet
+    #resource_group: panfw1-rg
+    #subnet_name2: trustsubnet
+    #address_prefix2: 10.1.2.0/24
+    #virtual_network: panfw1vnet

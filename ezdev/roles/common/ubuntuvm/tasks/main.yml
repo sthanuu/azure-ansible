@@ -1,18 +1,15 @@
 ---
 # tasks file for ubuntuvm
-- name: Create VM
-  azure_rm_virtualmachine:
-    resource_group: "{{ resource_group }}"
-    name: "{{ vm_name }}"
-    vm_size: Standard_DS1_v2
-    admin_username: "{{ admin_username }}"
-    ssh_password_enabled: false
-    ssh_public_keys:
-      - path: /home/azurekottur/.ssh/authorized_keys
-        key_data: "{{ your_key_data }}"
-    network_interfaces: "{{ nic_name }}"
-    image:
-      offer: UbuntuServer
-      publisher: Canonical
-      sku: '18.04-LTS'
-      version: latest
+  - name: Create VM
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "{{ vm_name }}"
+      vm_size: Standard_B1s
+      admin_username: "{{ admin_username }}"
+      ssh_password_enabled: false
+      ssh_public_keys:
+        - path: /home/azurekottur/.ssh/authorized_keys
+          key_data: "{{ ssh_key_data }}"
+      availability_set: "{{ ava_set }}"
+      network_interfaces: "{{ nic_name }}" 
+      image: "{{ image_name }}"

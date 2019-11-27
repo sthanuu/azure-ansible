@@ -1,5 +1,5 @@
 ---
 # vars file for nsg#
-    resource_group: testrg
-    nsg_name: testnsg
+    resource_group: vnet2-rg
+    nsg_name: vnet2nsg
 

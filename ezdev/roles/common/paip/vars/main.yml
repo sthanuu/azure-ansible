@@ -1,4 +1,5 @@
 ---
 # vars file for pubip
-    resource_group: testrg
-    publicip_name: testlbip
+    resource_group: vnet2-rg
+    publicip_name: webserver01pubip
+    publicip_name1: webserver02pubip

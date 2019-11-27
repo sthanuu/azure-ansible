@@ -1,14 +1,20 @@
 ---
 # tasks file for pslb
+- name: Create public IP address
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group }}"
+    allocation_method: Static
+    sku: Standard
+    name: "{{ frontendip_name }}"  
 - name: create load balancer
   azure_rm_loadbalancer:
         resource_group: "{{ resource_group }}"
         name: "{{ lb_name }}"
         frontend_ip_configurations:
           - name: "{{ frontendip_name }}"
-            subnet: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/vnet2-rg/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/default
-            private_ip_address: 10.2.0.10
-            private_ip_allocation_method: Static
+            subnet: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet 
+            private_ip_address: 20.0.1.10
+            private_ip_allocation_method: dynamic
         backend_address_pools:
           - name: "{{ backend_name }}"
         probes:

@@ -1,2 +1,9 @@
 ---
 # vars file for pslb
+resource_group: vnet2-rg
+lb_name: testpvtloadbalancer
+frontendip_name: frontendipconf
+pvtip_name: testpvtlbip
+backend_name: backendaddpool
+probe_name: prob
+lbrule_name: lbrule

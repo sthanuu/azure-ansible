@@ -7,4 +7,10 @@
       - include_role:
            name: subnet
       - include_role:
-           name: pslb
+           name: paip
+      - include_role:
+           name: nsg
+      - include_role:
+           name: nic
+      - include_role:
+           name: panfwvm

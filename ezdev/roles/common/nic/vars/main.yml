@@ -1,9 +1,13 @@
 ---
 # vars file for ni
-    resource_group: testrg
-    nic_name: testnic
-    vnet_name: testvnet
-    subnet_name: testsubnet
-    publicip_name: testpubip
-    nsg_name: testnsg
-
+    resource_group: vnet2-rg
+    nic_name: web01nic
+    vnet_name: vnet2
+    subnet_name: default
+    publicip_name: webserver01pubip
+    nsg_name: vnet2nsg
+    nic_name1: web02nic
+    subnet_name1: default
+    publicip_name1: webserver02pubip
+    #    nic_name2: panfwtrustnic
+    # subnet_name2: trustsubnet

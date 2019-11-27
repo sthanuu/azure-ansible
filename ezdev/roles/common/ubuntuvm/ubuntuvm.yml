@@ -1,4 +1,15 @@
 - hosts: localhost
   tasks:
       - include_role:
+           name: rg
+      - include_role:
+           name: vnet
+      - include_role:
+           name: subnet
+      - include_role:
+           name: nsg
+      - include_role:
+           name: nic
+      - include_role:
            name: ubuntuvm
+
