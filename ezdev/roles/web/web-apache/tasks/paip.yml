@@ -6,4 +6,10 @@
     allocation_method: Static
     sku: standard
     name: "{{ public_ip_name }}"
+- name: Create public IP address
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group }}"
+    allocation_method: Static
+    sku: standard
+    name: "{{ public_ip_name1 }}"
 

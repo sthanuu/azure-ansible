@@ -13,3 +13,16 @@
         primary: True
         private_ip_allocation_method: Static
         private_ip_address: 10.2.0.4
+- name: Create a network with mutilple ip configurations
+  azure_rm_networkinterface:
+    name: "{{ nic_name1 }}"
+    resource_group: "{{ resource_group }}"
+    subnet_name: "{{ subnet_name }}"
+    virtual_network_name: "{{ vnet_name }}"
+    security_group_name: "{{ nsg_name }}"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ public_ip_name1 }}"
+        primary: True
+        private_ip_allocation_method: Static
+        private_ip_address: 10.2.0.5

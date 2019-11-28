@@ -13,10 +13,12 @@ address_prefixes: 10.2.0.0/16
 subnet_name: default
 address_prefix1: 10.2.0.0/24
 public_ip_name: wensever01pubip
+public_ip_name1: websever02pubip
 nic_name: webserver01nic
 nic_name1: webserver02nic
 vm_name: webserver01
+vm_name1: webserver02
 admin_name: azureuser
 nsg_name: vnet2nsg
-
-
+as_name: vnet2as
+ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0QdzuAeq5lSS5GvMommPcUp4WmnJ96XL93SkXrgUKi+EzRmAREq1q3ZAVK3vyGda5lsUki4icms/8n3bhEPX6OWSBLuXwkeGaQ6lvOIzcKTd0fySOapXwws/5YnliJjIZuNkJun1joVWjO1XlKdZpNsYm0peuYmu8sJakDE7Kclo7JGmolCg4L3GA4frXQv2rkNr9nugLp6eULL78BE7XNn/5OF+G4T88keHKJEZpHLQouwJDKnj48KJQAorgt7Ol9SUNWOB+Uq3A8HO4SqiXvF8PXuTd8LkSzXQ1u6PWfERwYAW3DYmXPQmiwsedyGWZMRd+euhX4WOA+z549zcJ
