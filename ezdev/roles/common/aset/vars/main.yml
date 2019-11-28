@@ -1,0 +1,17 @@
+---
+# vars file for pslb
+resource_group: vnet2-rg
+location: eastus
+#lb_name: testpvtloadbalancer
+#frontendip_name: frontendipconf
+#pvtip_name: testpvtlbip
+#public_ip_name: lbpubip
+#backend_name: backendaddpool
+#probe_name: prob
+#lbrule_name: lbrule
+#vnet_name:  vnet2vnet
+#address_prefixes: 10.2.0.0/16
+#subnet_name: default
+#address_prefix1: 10.2.0.0/24
+as_name: vnet2as
+

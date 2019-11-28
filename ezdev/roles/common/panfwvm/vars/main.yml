@@ -3,6 +3,6 @@
     resource_group: panfw1-rg
     vm_name: panfw1vm
     admin_username: azureuser
-    nic_name: panfwmgmtnic
-    nic_name1: panfwuntrustnic
-    nic_name2: panfwtrustnic
+    nic_name: panfw1mgmtnic
+    nic_name1: panfw1untrustnic
+    nic_name2: panfw1trustnic

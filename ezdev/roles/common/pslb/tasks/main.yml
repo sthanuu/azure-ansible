@@ -1,12 +1,16 @@
 ---
 # tasks file for pslb
+- include_tasks: rg.yml
+- include_tasks: vnet.yml
+- include_tasks: subnet.yml
 - name: create load balancer
   azure_rm_loadbalancer:
         resource_group: "{{ resource_group }}"
         name: "{{ lb_name }}"
+        sku: Standard
         frontend_ip_configurations:
           - name: "{{ frontendip_name }}"
-            subnet: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/vnet2-rg/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/default
+            subnet: /subscriptions/68f6b170-cb61-4311-85a1-4f92bfaa44ec/resourceGroups/vnet2-rg/providers/Microsoft.Network/virtualNetworks/vnet2vnet/subnets/default
             private_ip_address: 10.2.0.10
             private_ip_allocation_method: Static
         backend_address_pools:

@@ -1,0 +1,10 @@
+---
+# tasks file for proximityg
+- name: Create an availability set with advanced options
+  azure_rm_availabilityset:
+    name: "{{ as_name }}"
+    location: "{{ location }}"
+    resource_group: "{{ resource_group }}"
+    platform_update_domain_count: 5
+    platform_fault_domain_count: 3
+    sku: Aligned

@@ -1,17 +1,12 @@
 ---
 # tasks file for palb
-- include_tasks: rg.yml
-- include_tasks: vnet.yml
-- include_tasks: subnet.yml
-- include_tasks: paip.yml
 - name: create load balancer
   azure_rm_loadbalancer:
     resource_group: "{{ resource_group }}"
     name: "{{ lb_name }}"
-    sku: Standard
     frontend_ip_configurations:
       - name: "{{ frontendip_name }}"
-        public_ip_address: "{{ public_ip_name }}"
+        public_ip_address: "{{ publicip_name }}"
     backend_address_pools:
       - name: "{{ backend_name }}"
     probes:

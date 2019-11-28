@@ -1,0 +1,9 @@
+---
+# vars file for palb
+resource_group: testrg
+lb_name: testloadbalancer
+frontendip_name: frontendipconf
+publicip_name: testlbip
+backend_name: backendaddpool
+probes_name: prob
+lbrule_name: lbrule

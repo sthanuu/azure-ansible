@@ -7,8 +7,7 @@
     vm_size: Standard_D3_v2
     admin_username: "{{ admin_username }}"
     admin_password: azureuser@123456
-    network_interfaces: "{{ nic_name }}"
-    network_interface_names: "{{ nic_name1 }}"
+    network_interfaces: "{{ nic_name , nic_name1 , nic_name2 }}"
     plan: 
       name: bundle2
       product: vmseries1
