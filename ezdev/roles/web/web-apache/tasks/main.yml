@@ -1,10 +1,20 @@
 ---
-# tasks file for web-apache
-- name: Create a VM with a custom image
+# tasks file for web-nginx
+- include_tasks: rg.yml
+- include_tasks: vnet.yml
+- include_tasks: subnet.yml
+- include_tasks: paip.yml
+- include_tasks: nsg.yml
+- include_tasks: nic.yml
+- name: Create VM
   azure_rm_virtualmachine:
-    resource_group: myResourceGroup
-    name: webserver01
-    vm_size: Standard_DS1_v2
-    admin_username: adminkottur
-    admin_password: azurekottur@123456
+    resource_group: "{{ resource_group }}"
+    name: "{{ vm_name }}"
+    vm_size: Standard_B1s
+    admin_username: "{{ admin_name }}" 
+    ssh_password_enabled: false
+    ssh_public_keys:
+        - path: /home/azureuser/.ssh/authorized_keys
+          key_data: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0QdzuAeq5lSS5GvMommPcUp4WmnJ96XL93SkXrgUKi+EzRmAREq1q3ZAVK3vyGda5lsUki4icms/8n3bhEPX6OWSBLuXwkeGaQ6lvOIzcKTd0fySOapXwws/5YnliJjIZuNkJun1joVWjO1XlKdZpNsYm0peuYmu8sJakDE7Kclo7JGmolCg4L3GA4frXQv2rkNr9nugLp6eULL78BE7XNn/5OF+G4T88keHKJEZpHLQouwJDKnj48KJQAorgt7Ol9SUNWOB+Uq3A8HO4SqiXvF8PXuTd8LkSzXQ1u6PWfERwYAW3DYmXPQmiwsedyGWZMRd+euhX4WOA+z549zcJ
+    network_interfaces: "{{ nic_name }}"
     image: UbuntuapacheImage

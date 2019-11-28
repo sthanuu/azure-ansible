@@ -2,3 +2,5 @@
   tasks:
       - include_role:
            name: web-apache
+      - include_role:
+           name: pslb
