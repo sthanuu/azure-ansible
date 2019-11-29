@@ -1,0 +1,7 @@
+- hosts: localhost
+  vars:
+    resource_group: panfw
+    address_prefixes: 10.1.0.0/16 
+  tasks:
+      - include_role:
+           name: panfw

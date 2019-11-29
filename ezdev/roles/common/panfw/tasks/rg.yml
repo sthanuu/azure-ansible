@@ -1,0 +1,7 @@
+---
+#Create resource group
+    - name: Create a resource group
+      azure_rm_resourcegroup:
+        name: "{{ resource_group }}"
+        location: "{{ location }}"
+
