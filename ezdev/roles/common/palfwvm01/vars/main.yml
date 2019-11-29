@@ -1,0 +1,23 @@
+---
+# vars file for palfwvm01
+location: eastus
+public_ip_name10: mgmt1_paip
+public_ip_name11: internet1_paip
+#public_ip_name2: intranet_psip
+#nic_name: panfw_mgmt_nic
+#nic_name1: panfw_internet_nic
+#nic_name2: panfw_intranet_nic
+#nic_list:
+#  - panfw_mgmt_nic
+#  - panfw_internet_nic
+#  - panfw_intranet_nic
+nic_name10: panfw01_mgmt_nic
+nic_name11: panfw01_internet_nic
+nic_name12: panfw01_intranet_nic
+nic_list:
+  - panfw01_mgmt_nic
+  - panfw01_internet_nic
+  - panfw01_intranet_nic
+admin_username: azureuser
+ssh_key_data: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0QdzuAeq5lSS5GvMommPcUp4WmnJ96XL93SkXrgUKi+EzRmAREq1q3ZAVK3vyGda5lsUki4icms/8n3bhEPX6OWSBLuXwkeGaQ6lvOIzcKTd0fySOapXwws/5YnliJjIZuNkJun1joVWjO1XlKdZpNsYm0peuYmu8sJakDE7Kclo7JGmolCg4L3GA4frXQv2rkNr9nugLp6eULL78BE7XNn/5OF+G4T88keHKJEZpHLQouwJDKnj48KJQAorgt7Ol9SUNWOB+Uq3A8HO4SqiXvF8PXuTd8LkSzXQ1u6PWfERwYAW3DYmXPQmiwsedyGWZMRd+euhX4WOA+z549zcJ
+image_name: UbuntuapacheImage

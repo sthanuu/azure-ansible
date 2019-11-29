@@ -1,0 +1,21 @@
+#- hosts: localhost
+#  vars:
+#    resource_group1: panfw02
+#    address_prefixes1: 10.3.0.0/16
+#    Mgmt1: 10.3.0.0/24
+#    Internet1: 10.3.1.0/24
+#    Intranet1: 10.3.2.0/24
+#    mgmt_pvtip1: 10.3.0.4
+#    internet_pvtip1: 10.3.1.4
+#    intranet_pvtip1: 10.3.2.4
+#  tasks:
+#      - include_role:
+#           name: panfw
+#      - include_role:
+#           name: Mgmt
+#      - include_role:
+#           name: Internet
+#      - include_role:
+#           name: Intranet
+#      - include_role:
+#           name: palfwvm

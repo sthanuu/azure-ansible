@@ -1,15 +1,25 @@
 ---
 # tasks file for panfw#
-- name: Create a resource group
+- name: Create a resource group for firewall
   azure_rm_resourcegroup:
     name: "{{ resource_group }}-rg"
     location: "{{ location }}"
 # tasks file for vnet
-- name: Create virtual network
+- name: Create virtual network fro firewall
   azure_rm_virtualnetwork:
     resource_group: "{{ resource_group }}-rg"
     name: "{{ resource_group }}-vnet"
     address_prefixes: "{{ address_prefixes }}"
+- name: Create a resource group for firewall01
+  azure_rm_resourcegroup:
+    name: "{{ resource_group1 }}-rg"
+    location: "{{ location }}"
+# tasks file for vnet
+- name: Create virtual network fro firewall01
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resource_group1 }}-rg"
+    name: "{{ resource_group1 }}-vnet"
+    address_prefixes: "{{ address_prefixes1 }}"
 
 
 

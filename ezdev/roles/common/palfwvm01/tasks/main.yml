@@ -1,0 +1,100 @@
+---
+# tasks file for palfwvm01
+#- name: Create resource group
+#  azure_rm_resourcegroup:
+#    name: "{{ resource_group1 }}-rg"
+#    location: "{{ location }}" 
+#- name: Create virtual network
+#  azure_rm_virtualnetwork:
+#    resource_group: "{{ resource_group1 }}-rg"
+#    name: "{{ resource_group1 }}-vnet"
+#    address_prefixes: "{{ address_prefixes1 }}"
+- name: Create Mgmt public IP address for firewall01
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group1 }}-rg"
+    allocation_method: Static
+    sku: Standard
+    name: "{{ public_ip_name10 }}"
+  register: output_ip_address
+- name: Dump public IP for VM which will be created
+  debug:
+    msg: "The public IP is {{ output_ip_address.state.ip_address }}."
+- name: Create Internet public IP address for firewall02
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group1 }}-rg"
+    allocation_method: Static
+    sku: Standard
+    name: "{{ public_ip_name11 }}"
+  register: output_ip_address
+- name: Dump public IP for VM which will be created
+  debug:
+    msg: "The public IP is {{ output_ip_address.state.ip_address }}."
+- name: Create Network Security Group for firewall01
+  azure_rm_securitygroup:
+    resource_group: "{{ resource_group1 }}-rg"
+    name: "{{ resource_group1 }}-nsg"
+    rules:
+      - name: Allow-all
+        protocol: Tcp
+        destination_port_range: '*'
+        access: Allow
+        priority: 1001
+        direction: Inbound
+- name: Create a network with mutilple ip configurations for firewall01
+  azure_rm_networkinterface:
+    name: "{{ nic_name10 }}"
+    resource_group: "{{ resource_group1 }}-rg"
+    subnet_name: Mgmt
+    virtual_network_name: "{{ resource_group1 }}-vnet"
+    security_group_name: "{{ resource_group1 }}-nsg"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ public_ip_name10 }}"
+        primary: True
+        private_ip_allocation_method: Static
+        private_ip_address: "{{ mgmt_pvtip1 }}"
+- name: Create a network with mutilple ip configurations for firewall01
+  azure_rm_networkinterface:
+    name: "{{ nic_name11 }}"
+    resource_group: "{{ resource_group1 }}-rg"
+    subnet_name: Internet
+    virtual_network_name: "{{ resource_group1 }}-vnet"
+    security_group_name: "{{  resource_group1 }}-nsg"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ public_ip_name11 }}"
+        primary: True
+        private_ip_allocation_method: Static
+        private_ip_address: "{{ internet_pvtip1 }}"
+- name: Create a network interface with private IP address only (no Public IP) for firewall01
+  azure_rm_networkinterface:
+    name: "{{ nic_name12 }}"
+    resource_group: "{{ resource_group1 }}-rg"
+    virtual_network_name: "{{  resource_group1 }}-vnet"
+    subnet_name: Intranet
+    security_group_name: "{{  resource_group1 }}-nsg"
+    ip_configurations:
+      - name: ipconfig1
+        private_ip_allocation_method: Static
+        private_ip_address: "{{ intranet_pvtip1 }}"
+        primary: True
+- name: Create VM for firewall01
+  azure_rm_virtualmachine:
+    resource_group: "{{ resource_group1 }}-rg"
+    name: "{{ resource_group1 }}-vm"
+    vm_size: Standard_D3_v2
+    admin_username: "{{ admin_username }}"
+    ssh_password_enabled: false
+    ssh_public_keys:
+      - path: /home/azureuser/.ssh/authorized_keys
+        key_data: "{{ ssh_key_data }}"
+    network_interfaces: "{{ nic_list }}" 
+    plan: 
+      name: bundle2
+      product: vmseries1
+      publisher: paloaltonetworks
+    image:
+      offer: vmseries1
+      publisher: paloaltonetworks
+      sku: 'bundle2'
+      version: latest

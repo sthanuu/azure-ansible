@@ -1,8 +1,15 @@
 ---
 # tasks file for Internet
-- name: Add subnet
+- name: Add subnet for Firewall
   azure_rm_subnet:
     resource_group: "{{ resource_group }}-rg"
     name: "{{ subnet }}"
     address_prefix: "{{ Internet }}"
     virtual_network: "{{ resource_group }}-vnet"
+- name: Add subnet for Firewall01
+  azure_rm_subnet:
+    resource_group: "{{ resource_group1 }}-rg"
+    name: "{{ subnet }}"
+    address_prefix: "{{ Internet1 }}"
+    virtual_network: "{{ resource_group1 }}-vnet"
+
