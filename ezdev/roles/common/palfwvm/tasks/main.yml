@@ -46,7 +46,7 @@
     resource_group: "{{ resource_group }}-rg"
     subnet_name: Mgmt
     virtual_network_name: "{{ resource_group }}-vnet"
-    security_group_name: "{{ resource_group }}-rg"
+    security_group_name: "{{ resource_group }}-nsg"
     ip_configurations:
       - name: ipconfig1
         public_ip_address_name: "{{ public_ip_name }}"
