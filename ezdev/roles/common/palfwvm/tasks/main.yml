@@ -1,0 +1,100 @@
+---
+# tasks file for palfwvm
+- name: Create resource group
+  azure_rm_resourcegroup:
+    name: "{{ resource_group }}-rg"
+    location: "{{ location }}" 
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resource_group }}-rg"
+    name: "{{ resource_group }}-vnet"
+    address_prefixes: "{{ address_prefixes }}"
+- name: Create Mgmt public IP address 
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group }}-rg"
+    allocation_method: Static
+    sku: Standard
+    name: "{{ public_ip_name }}"
+  register: output_ip_address
+- name: Dump public IP for VM which will be created
+  debug:
+    msg: "The public IP is {{ output_ip_address.state.ip_address }}."
+- name: Create Internet public IP address
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group }}-rg"
+    allocation_method: Static
+    sku: Standard
+    name: "{{ public_ip_name1 }}"
+  register: output_ip_address
+- name: Dump public IP for VM which will be created
+  debug:
+    msg: "The public IP is {{ output_ip_address.state.ip_address }}."
+- name: Create Network Security Group that allows SSH
+  azure_rm_securitygroup:
+    resource_group: "{{ resource_group }}-rg"
+    name: "{{ resource_group }}-nsg"
+    rules:
+      - name: Allow-all
+        protocol: Tcp
+        destination_port_range: '*'
+        access: Allow
+        priority: 1001
+        direction: Inbound
+- name: Create a network with mutilple ip configurations
+  azure_rm_networkinterface:
+    name: "{{ nic_name }}"
+    resource_group: "{{ resource_group }}-rg"
+    subnet_name: Mgmt
+    virtual_network_name: "{{ resource_group }}-vnet"
+    security_group_name: "{{ resource_group }}-rg"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ public_ip_name }}"
+        primary: True
+        private_ip_allocation_method: Static
+        private_ip_address: "{{ mgmt_pvtip }}"
+- name: Create a network with mutilple ip configurations
+  azure_rm_networkinterface:
+    name: "{{ nic_name1 }}"
+    resource_group: "{{ resource_group }}-rg"
+    subnet_name: Internet
+    virtual_network_name: "{{ resource_group }}-vnet"
+    security_group_name: "{{  resource_group }}-nsg"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ public_ip_name1 }}"
+        primary: True
+        private_ip_allocation_method: Static
+        private_ip_address: "{{ internet_pvtip }}"
+- name: Create a network interface with private IP address only (no Public IP)
+  azure_rm_networkinterface:
+    name: "{{ nic_name2 }}"
+    resource_group: "{{ resource_group }}-rg"
+    virtual_network_name: "{{  resource_group }}-vnet"
+    subnet_name: Intranet
+    security_group_name: "{{  resource_group }}-nsg"
+    ip_configurations:
+      - name: ipconfig1
+        private_ip_allocation_method: Static
+        private_ip_address: "{{ intranet_pvtip }}"
+        primary: True
+- name: Create VM
+  azure_rm_virtualmachine:
+    resource_group: "{{ resource_group }}-rg"
+    name: "{{ resource_group }}-vm"
+    vm_size: Standard_D3_v2
+    admin_username: "{{ admin_username }}"
+    ssh_password_enabled: false
+    ssh_public_keys:
+      - path: /home/azureuser/.ssh/authorized_keys
+        key_data: "{{ ssh_key_data }}"
+    network_interfaces: "{{ nic_list }}" 
+    plan: 
+      name: bundle2
+      product: vmseries1
+      publisher: paloaltonetworks
+    image:
+      offer: vmseries1
+      publisher: paloaltonetworks
+      sku: 'bundle2'
+      version: latest

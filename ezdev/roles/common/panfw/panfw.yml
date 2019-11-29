@@ -1,7 +1,16 @@
-- hosts: localhost
-  vars:
-    resource_group: panfw
-    address_prefixes: 10.1.0.0/16 
-  tasks:
-      - include_role:
-           name: panfw
+#- hosts: localhost
+# vars:
+#   resource_group: panfw
+#   address_prefixes: 10.1.0.0/16
+#   Mgmt: 10.1.0.0/24
+#   Internet: 10.1.1.0/24
+#   Intranet: 10.1.2.0/24 
+# tasks:
+#     - include_role:
+#          name: panfw
+#     - include_role:
+#          name: Mgmt
+#     - include_role:
+#          name: Internet
+#     - include_role:
+#          name: Intranet
